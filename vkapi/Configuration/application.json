@@ -7,6 +7,8 @@
     },
 
     "security": {
+      "app_id": "",
+      "app_sec": ""
     },
 
     "display": "mobile",
