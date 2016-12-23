@@ -3,48 +3,25 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
+
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
 namespace vkapi
 {
-    public class Settings
-    {
-        internal string Protocol = "https://";
-        internal string Oauth = "oauth.vk.com";
-        internal string Api = "api.vk.com";
-
-        public string ClientId;
-        public string ClientSecret;
-
-        internal string RedirectUri = "blank.html";
-        internal string Display = "mobile";
-        internal string Version = "5.60";
-        internal string Type = "code";
-
-        public string scope = "";
-        public string[] Permissions;
-
-        public string Scope
-        {
-            get { return Functions.GenerateScope(Permissions); }
-            set { scope = value; }
-        }
-    }
 
     public delegate dict AuthEvent(Object sender, EventArguments events);
-    public class Auth
+    public class Auth : Configuration
     {
-        private Settings Settings;
         private VEventHandler _event;
 
-        public Auth(Settings settings, MaterialEvent materialEvent = null)
+        public Auth(MaterialEvent materialEvent = null)
         {
-            Settings = settings;
             _event = new VEventHandler();
 
             if (materialEvent == null)
                 materialEvent = new MaterialEvent();
 
+            // Регистрируем подписчиков на события
             _event.IssetLogin += new AuthEvent(materialEvent.OnIssetLogin);
             _event.IseetCode += new AuthEvent(materialEvent.OnIssetCode);
             _event.IssetCaptcha += new AuthEvent(materialEvent.OnIssetCaptcha);
@@ -59,7 +36,7 @@ namespace vkapi
         {
             dict InputArgument, FormArgument, eventObject;
 
-            String html, code = null, url = Functions.GenerateAuthorize(Settings);
+            String html, code = null, url = Functions.GenerateAuthorize(this.application);
 
             using (Processor processor = new Processor())
             {
@@ -67,7 +44,7 @@ namespace vkapi
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
                 processor.Encoding = System.Text.Encoding.UTF8;
 
-                html = processor.DownloadString(@url);
+                html = processor.DownloadString(url);
 
                 while (code == null)
                 {
@@ -135,7 +112,7 @@ namespace vkapi
 
             using (Processor processor = new Processor())
             {
-                string url = Functions.GenerateAccessRequest(Settings, code);
+                string url = Functions.GenerateAccessRequest(this.application, code);
                 string json = processor.DownloadString(@url);
                 accessToken = JsonConvert.DeserializeObject<AccessToken>(json);
 
@@ -196,5 +173,13 @@ namespace vkapi
             return accessToken;
         }
 
+    }
+
+    [Serializable]
+    public class AccessToken
+    {
+        public string access_token = null;
+        public long expires_in = 0;
+        public string user_id = null;
     }
 }

@@ -12,11 +12,11 @@ namespace vkapi
         /// </summary>
         /// <param name="permissions"></param>
         /// <returns>String cope</returns>
-        public static string GenerateScope(string[] permissions)
+        public static string GenerateScope(Application app)
         {
             string scope = "";
 
-            foreach (var line in permissions)
+            foreach (var line in app.scope)
             {
                 scope += line + ",";
             }
@@ -139,19 +139,19 @@ namespace vkapi
         /// Преобразовываем массив данных в строку GET запроса
         /// </summary>
         /// <returns></returns>
-        public static string GenerateAuthorize(Settings settings)
+        public static string GenerateAuthorize(Application app)
         {
             dict parameters = new dict
             {
-                {"client_id", settings.ClientId},
-                {"redirect_uri", settings.Protocol + settings.Oauth + "/" + settings.RedirectUri},
-                {"display", settings.Display},
-                {"scope", settings.Scope},
-                {"response_type", settings.Type},
-                {"v", settings.Version}
+                {"client_id", app.security.app_id},
+                {"redirect_uri", app.protocol + app.url.oauth + "/" + app.url.uri},
+                {"display", app.display},
+                {"scope", GenerateScope(app)},
+                {"response_type", app.type},
+                {"v", app.version}
             };
 
-            string link = settings.Protocol + settings.Oauth + "/authorize?";
+            string link = app.protocol + app.url.oauth + "/authorize?";
 
             foreach (KeyValuePair<string, string> line in parameters)
                 link += line.Key + "=" + line.Value + "&";
@@ -165,17 +165,17 @@ namespace vkapi
         /// <param name="settings"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static string GenerateAccessRequest(Settings settings, string code)
+        public static string GenerateAccessRequest(Application app, string code)
         {
             dict arguments = new dict
             {
-                {"client_id", settings.ClientId},
-                {"client_secret", settings.ClientSecret},
-                {"redirect_uri", settings.Protocol + settings.Oauth + "/" + settings.RedirectUri},
+                {"client_id", app.security.app_id},
+                {"client_secret", app.security.app_sec},
+                {"redirect_uri", app.protocol + app.url.oauth + "/" + app.url.uri},
                 {"code", code}
             };
 
-            String url = settings.Protocol + settings.Oauth + "/access_token?";
+            String url = app.protocol + app.url.oauth + "/access_token?";
             foreach (KeyValuePair<string, string> line in arguments)
                 url += line.Key + "=" + line.Value + "&";
 
@@ -194,6 +194,25 @@ namespace vkapi
             if (nowTime < accessToken.expires_in)
                 return true;
             return false;
+        }
+
+        /// <summary>
+        /// Преобразовываем массив параметров в строку.
+        /// </summary>
+        /// <param name="fileds"></param>
+        /// <returns></returns>
+        public static string ListFiled(string[] fileds)
+        {
+            string data = "";
+            foreach (string param in fileds)
+                data += param + ",";
+
+            return data.Remove(data.Length - 1);
+        }
+
+        public static string GenerateApi(Application app, string method)
+        {
+            return app.protocol + app.url.api + "/method/" + method + "?v=" + app.version;
         }
     }
 }

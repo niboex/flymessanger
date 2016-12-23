@@ -25,7 +25,6 @@ namespace vkapi
         public virtual dict OnIssetLogin()
         {
             var handler = IssetLogin;
-//            Debug.Assert(handler != null, "handler != null");
             if (handler != null)
                 return handler(this, new EventArguments());
 
@@ -80,7 +79,6 @@ namespace vkapi
         public virtual dict OnIssetCode(Object sender, EventArguments events)
         {
             // Возвращаем массив dict с ключем "code"
-
             return new dict() {
                 {"code","123548"}
             };
