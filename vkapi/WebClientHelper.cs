@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+
 
 namespace vkapi
 {
-
-    public class Processor : WebClient, IDisposable
+    public class WebClientHelper : WebClient
     {
 
-        private String TempFolder = @"./temp";
+        private String TempFolder = @"./Temps";
         private String SessionPath;
 
         Uri _responseUri;
@@ -18,11 +20,29 @@ namespace vkapi
         public CookieContainer CookieContainer { get; set; }
         public Uri ResponseUri { get { return _responseUri; } }
 
-        public Processor()
+        public WebClientHelper()
         {
+            Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            Encoding = Encoding.UTF8;
             SessionPath = CheckSessionFolder();
             CookieContainer = CookieLoad();
         }
+
+        /// <summary>
+        /// Преобразовываем массив данных в POST запрос
+        /// </summary>
+        /// <param name="sourceData"></param>
+        /// <returns>string</returns>
+        public static string PostStringConverter(Dictionary<string, string> sourceData)
+        {
+            string postData = "";
+
+            foreach (KeyValuePair<string, string> line in sourceData)
+                postData += line.Key + "=" + line.Value + "&";
+
+            return postData.Remove(postData.Length - 1);
+        }
+
 
         /// <summary>
         /// Проверяем дериктории и файл сессии
@@ -54,7 +74,7 @@ namespace vkapi
                 Stream stream = new FileStream(SessionPath, FileMode.Open, FileAccess.Read, FileShare.Read);
                 try
                 {
-                    cookieContainer = (CookieContainer) formatter.Deserialize(stream);
+                    cookieContainer = (CookieContainer)formatter.Deserialize(stream);
                     stream.Close();
                 }
                 catch (Exception)
@@ -76,6 +96,15 @@ namespace vkapi
             Stream stream = new FileStream(SessionPath, FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, CookieContainer);
             stream.Close();
+        }
+
+        /// <summary>
+        /// Удаляем куки
+        /// </summary>
+        public void CookieDel()
+        {
+            if (File.Exists(SessionPath))
+                File.Delete(SessionPath);
         }
 
         /// <summary>

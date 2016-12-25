@@ -20,9 +20,6 @@
 
     "type": "code",
 
-    "temp_folder": "./temp",
-    "conf_folder": "./configuration"
+    "temp_folder": "./Temps",
+    "conf_folder": "./Configuration"
 }
-
-
-
