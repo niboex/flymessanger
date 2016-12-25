@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using vkapi;
+using System.IO;
 
 
 namespace Interface
@@ -24,6 +25,12 @@ namespace Interface
         private void send_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            File.Delete(@"D:\Development\flymessanger\Interface\Interface\bin\Debug\temp\access_token.bin");
+            File.Delete(@"D:\Development\flymessanger\Interface\Interface\bin\Debug\temp\session.bin");
         }
     }
 }
