@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
+using log4net;
+using vkapi.Auth;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
-namespace vkapi
+namespace vkapi.Events
 {
-
-    public class EventArguments : EventArgs
+    public class EventArguments
     {
         private string _captchaImageSrc;
 
@@ -16,18 +16,22 @@ namespace vkapi
         }
     }
 
-    class VEventHandler
+    class AuthEventHandler
     {
         public event AuthEvent IssetLogin;
         public event AuthEvent IssetCaptcha;
         public event AuthEvent IseetCode;
 
+        private ILog log = LogHelper.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().ReflectedType);
+
         public virtual dict OnIssetLogin()
         {
             var handler = IssetLogin;
-//            Debug.Assert(handler != null, "handler != null");
             if (handler != null)
+            {
+                log.Info("Вызванно событие IssetLogin");
                 return handler(this, new EventArguments());
+            }
 
             return null;
         }
@@ -36,7 +40,10 @@ namespace vkapi
         {
             var handler = IseetCode;
             if (handler != null)
+            {
+                log.Info("Вызванно событие IssetCode");
                 return handler(this, new EventArguments());
+            }
 
             return null;
         }
@@ -47,20 +54,22 @@ namespace vkapi
             EventArguments arguments = new EventArguments();
             arguments.CaptchaImageSrc = src;
 
-//            Debug.Assert(handler != null, "handler != null");
             if (handler != null)
+            {
+                log.Info("Вызванно событие IssetCapthcha");
                 return handler(this, arguments);
+            }
 
             return null;
         }
     }
+    
 
-    public class MaterialEvent
+    public class AuthEventMethods
     {
         public virtual dict OnIssetCaptcha(Object sender, EventArguments events)
         {
             // Возвращаем массив dict с ключем "captcha"
-
             Console.WriteLine(events.CaptchaImageSrc);
 
             return new dict() {
@@ -68,7 +77,7 @@ namespace vkapi
             };
         }
 
-        public virtual dict OnIssetLogin(Object sender, EventArgs evetns)
+        public virtual dict OnIssetLogin(Object sender, EventArguments evetns)
         {
             // Возвращаем массив dict с ключами "email", "pass"
 
@@ -80,7 +89,6 @@ namespace vkapi
         public virtual dict OnIssetCode(Object sender, EventArguments events)
         {
             // Возвращаем массив dict с ключем "code"
-
             return new dict() {
                 {"code","123548"}
             };
