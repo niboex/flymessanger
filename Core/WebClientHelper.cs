@@ -5,11 +5,9 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Windows;
 using log4net;
 
-
-namespace vkapi
+namespace flymessanger.Core
 {
     public class WebClientHelper : WebClient
     {

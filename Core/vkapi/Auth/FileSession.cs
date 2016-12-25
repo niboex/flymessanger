@@ -2,10 +2,10 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using flymessanger.Core.vkapi.Objects;
 using log4net;
-using vkapi.Objects;
 
-namespace vkapi.Auth
+namespace flymessanger.Core.vkapi.Auth
 {
     public class FileSession: Configuration
     {

@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
+using flymessanger.Core.vkapi.Objects;
 using log4net;
-using vkapi.Objects;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
-namespace vkapi.Auth
+namespace flymessanger.Core.vkapi.Auth
 {
     class ConnectHelpers
     {
         /// <summary>
         /// Преобразовываем лист прав доступа в строку.
         /// </summary>
-        /// <param name="permissions"></param>
         /// <returns>String cope</returns>
         public static string GenerateScope(string[] permission)
         {
@@ -57,7 +56,7 @@ namespace vkapi.Auth
         /// <summary>
         /// Преобразовываем переданные данных в строку для GET запроса
         /// </summary>
-        /// <param name="settings"></param>
+        /// <param name="app"></param>
         /// <param name="code"></param>
         /// <returns></returns>
         public static string GenerateAccessRequest(Application app, string code)

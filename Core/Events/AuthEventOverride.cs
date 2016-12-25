@@ -1,6 +1,5 @@
-﻿using flymessanger.Templates;
-using vkapi.Events;
-
+﻿using flymessanger.Core.vkapi.Events;
+using flymessanger.Templates;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
 namespace flymessanger.Core.Events
@@ -21,10 +20,10 @@ namespace flymessanger.Core.Events
             return new dict() { { "code", c1.code } };
         }
 
-        public override dict OnIssetCaptcha(object sender, EventArguments events)
-        {
-
-            return base.OnIssetCaptcha(sender, events);
-        }
+//        public override dict OnIssetCaptcha(object sender, EventArguments events)
+//        {
+//
+//            return base.OnIssetCaptcha(sender, events);
+//        }
     }
 }

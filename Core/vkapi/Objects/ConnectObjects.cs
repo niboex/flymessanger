@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace vkapi.Objects
+namespace flymessanger.Core.vkapi.Objects
 {
     #region ServiceAccessKey
 

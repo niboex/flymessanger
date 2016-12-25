@@ -2,12 +2,12 @@
 using System.Net;
 using log4net;
 using Newtonsoft.Json;
-using vkapi.Events;
-using vkapi.Objects;
+using flymessanger.Core.vkapi.Events;
+using flymessanger.Core.vkapi.Objects;
 
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
-namespace vkapi.Auth
+namespace flymessanger.Core.vkapi.Auth
 {
 
     public delegate dict AuthEvent(Object sender, EventArguments events);

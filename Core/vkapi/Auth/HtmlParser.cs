@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using flymessanger.Core.vkapi.Objects;
 using log4net;
-using vkapi.Objects;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
-namespace vkapi.Auth
+namespace flymessanger.Core.vkapi.Auth
 {
     class HtmlParser
     {
@@ -102,7 +102,7 @@ namespace vkapi.Auth
         {
             ILog log = LogHelper.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().ReflectedType);
             string src = "", pattern = @"img\b[^\<\>]+?\bsrc\s*=\s*[""'](?<L>.+?)[""'][^\<\>]*?\>";
-            Captcha cp = new Captcha();;
+            Captcha cp = new Captcha();
 
             foreach (Match match in Regex.Matches(html, pattern))
             {
@@ -130,9 +130,9 @@ namespace vkapi.Auth
             HtmlContainer container = new HtmlContainer();
 
             log.Info("Собираем данные с полученной страницы");
-            container.FDictionary = HtmlParser.FromArgument(source);
-            container.IDictionary = HtmlParser.InputArguments(source);
-            container.Captcha = HtmlParser.GetCaptchaImg(source);
+            container.FDictionary = FromArgument(source);
+            container.IDictionary = InputArguments(source);
+            container.Captcha = GetCaptchaImg(source);
 
             return container;
         }

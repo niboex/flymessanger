@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using flymessanger.Core.Events;
-
-using vkapi.Auth;
-using vkapi.Objects;
+using flymessanger.Core.vkapi.Auth;
+using flymessanger.Core.vkapi.Objects;
 
 namespace flymessanger.Templates
 {

@@ -1,4 +1,4 @@
-﻿namespace vkapi.Objects
+﻿namespace flymessanger.Core.vkapi.Objects
 {
 
     public class Application

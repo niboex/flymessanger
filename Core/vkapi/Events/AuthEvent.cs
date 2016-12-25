@@ -1,9 +1,9 @@
 ﻿using System;
+using flymessanger.Core.vkapi.Auth;
 using log4net;
-using vkapi.Auth;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
-namespace vkapi.Events
+namespace flymessanger.Core.vkapi.Events
 {
     public class EventArguments
     {

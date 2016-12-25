@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
+using flymessanger.Core.vkapi.Objects;
 using log4net;
 using Newtonsoft.Json;
-using vkapi.Objects;
 
-namespace vkapi
+namespace flymessanger.Core
 {
     public class Configuration
     {

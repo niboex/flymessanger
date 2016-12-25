@@ -4,16 +4,13 @@ using System.Text;
 using log4net;
 using log4net.Appender;
 using log4net.Core;
-using log4net.Filter;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
-using static log4net.Appender.FileAppender;
 
-namespace vkapi
+namespace flymessanger.Core
 {
     class LogHelper
     {
-//        private bool isLoad = false;
         public static ILog GetLogger(Type logger)
         {
             Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
@@ -61,7 +58,7 @@ namespace vkapi
         {
             FileAppender appender = new FileAppender();
             appender.File = @"Logs\vkapi.log";
-            appender.LockingModel = new MinimalLock();
+            appender.LockingModel = new FileAppender.MinimalLock();
             appender.Layout = patternLayout("[%5.level] %date{HH:mm:ss} %logger: %message%newline%exception");
             appender.AppendToFile = true;
             appender.ActivateOptions();
