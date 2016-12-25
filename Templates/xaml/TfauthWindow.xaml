@@ -1,0 +1,13 @@
+﻿<Window x:Class="flymessanger.Templates.TfauthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:flymessanger.Templates"
+        mc:Ignorable="d"
+        Title="Check_code" Height="150" Width="200" WindowStyle="ToolWindow">
+    <Grid>
+        <TextBox x:Name="Code_box" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172"/>
+        <Button x:Name="send_code" Content="Submit" HorizontalAlignment="Left" Margin="36,60,0,0" VerticalAlignment="Top" Width="122" Height="44" Click="send_code_Click" IsCancel="True"/>
+    </Grid>
+</Window>
