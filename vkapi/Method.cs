@@ -1,39 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net;
 using System.Text;
+using System.Xml;
 using dict = System.Collections.Generic.Dictionary<string, string>;
 
 namespace vkapi
 {
-    public class Method
-    {
-        private Settings _settings;
-        private AccessToken _accessToken;
 
-        public Method(Settings settings, AccessToken accessToken)
+    public class Users : Configuration
+    {
+        private WebClient client = new WebClient();
+        private AccessToken _token;
+
+        public Users(AccessToken token)
         {
-            _settings = settings;
-            _accessToken = accessToken;
+            _token = token;
+            client.Encoding = Encoding.UTF8;
         }
 
-        public void Get(string method, dict parameters)
+        public void get(string user_ids, string[] fields, string name_case = "nom")
         {
-            string methodData = _settings.Protocol + _settings.Api + "/method/" + method + "?";
-            foreach (KeyValuePair<string, string> parameter in parameters)
-                methodData += parameter.Key + "=" + parameter.Value + "&";
+            string container = Functions.GenerateApi(application, "users.get.xml") +
+                               "&access_token=" + _token.access_token +
+                               "&users_ids=" + user_ids +
+                               "&name_case=" + name_case +
+                               "&fields=" + Functions.ListFiled(fields);
 
-            methodData += "access_token=" + _accessToken.access_token + "&v=" + _settings.Version;
+            string output = client.DownloadString(container);
 
-            using (Processor processor = new Processor())
-            {
-                processor.Encoding = Encoding.UTF8;
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(output);
 
-                string response = processor.DownloadString(methodData);
-                Console.WriteLine(response);
-            }
-
-            Console.ReadLine();
-
+            Console.WriteLine(output);
         }
     }
 }
