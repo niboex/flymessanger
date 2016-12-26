@@ -25,31 +25,12 @@ namespace Interface
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //Обрабокта события перетаскивания окна
         {
-            Environment.Exit(0);
+            DragMove();
         }
 
-        private void nen_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            login = Login.Text;
-            pass = Pass.Password;
-            Close();
-        }
-
-        private void nen_MouseEnter(object sender, MouseEventArgs e)
-        {
-            nen.Opacity = 0;
-            nen1.Opacity = 100;
-        }
-
-        private void nen_MouseLeave(object sender, MouseEventArgs e)
-        {
-            nen.Opacity = 100;
-            nen1.Opacity = 0;
-        }
-
+        #region //События наведения мыши на поле логина
         private void Login_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Login.Text == "" || Login.Text == "Логин")
@@ -60,13 +41,15 @@ namespace Interface
 
         private void Login_MouseLeave(object sender, MouseEventArgs e)
         {
-            if(Login.Text == "")
+            if (Login.Text == "")
             {
                 Login.Clear();
                 Login.Text = "Логин";
             }
         }
+        #endregion
 
+        #region //События наведения мыши на поле пароля
         private void Pass_MouseEnter(object sender, MouseEventArgs e)
         {
             if (Pass.Password == "" || Pass.Password == "123456")
@@ -82,6 +65,63 @@ namespace Interface
                 Pass.Clear();
                 Pass.Password = "123456";
             }
+        }
+        #endregion
+
+        #region //События нажатия и наведения для кнопки входа
+        public bool k = false;
+
+        private void Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //Обработка нажатия левой кнопкой мыши на кнопку входа
+        {
+            Button.Opacity = 0;
+            Button_click.Opacity = 100;
+        }
+
+        private void Button_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) //Обработка события отжатия левой кнопки мыши с кнопки входа
+        {
+            login = Login.Text;
+            pass = Pass.Password;
+            k = true;
+            Close();
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e) //Обработка события наведения мыши на кнопку входа
+        {
+            if (k == false)
+            {
+                Button_click.Opacity = 0;
+            }
+            Button.Opacity = 0;
+            ButtonDown.Opacity = 100;
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e) //Обработка события ухода мыши с кнопки входа
+        {
+            ButtonDown.Opacity = 0;
+            Button.Opacity = 100;
+        }
+        #endregion
+        public bool l = false;
+        private void close_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) //Обработка события нажатия левой кнопкой мыши на кнопку Закрытия
+        {
+            close.Opacity = 0;
+            closeenter.Opacity = 0;
+        }
+        private void close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) //Обработка события отжатия левой кнопки мыши с кнопки закрытия
+        {
+            Environment.Exit(0);
+        }
+
+        private void close_MouseEnter(object sender, MouseEventArgs e)
+        {
+            close.Opacity = 0;
+            closeclick.Opacity = 0;
+        }
+
+        private void close_MouseLeave(object sender, MouseEventArgs e)
+        {
+            closeclick.Opacity = 100;
+            close.Opacity = 100;
         }
     }
 }

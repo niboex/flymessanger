@@ -10,14 +10,23 @@
         <ImageBrush/>
     </Window.Background>
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="300" Source="D:\Development\flymessanger\Interface\Interface\PIc\Background.png" />
-        <Image x:Name="nen" Source= "D:\Development\flymessanger\Interface\Interface\PIc\SignInButton.png" Margin="108,186,107,29" MouseDown="nen_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="nen_MouseEnter" MouseLeave="nen_MouseLeave" />
-        <Image x:Name="buttin_click" Source= "D:\Development\flymessanger\Interface\Interface\PIc\SignInButtonClick.png" Margin="108,186,107,29" MouseDown="nen_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="nen_MouseEnter" MouseLeave="nen_MouseLeave" />
-        <Image x:Name="nen1" Source= "D:\Development\flymessanger\Interface\Interface\PIc\SignInButtonDown.png" Margin="108,210,107,52" MouseDown="nen_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center" MouseEnter="nen_MouseEnter" MouseLeave="nen_MouseLeave" RenderTransformOrigin="0.5,0.056" />
-        <Button x:Name="button1" Content="Button" HorizontalAlignment="Left" Margin="6,126,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
-        <TextBox x:Name="Login" HorizontalAlignment="Left" Height="37" Margin="44,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="White" BorderThickness="0" SelectionOpacity="0.5" Text="Логин" FontFamily="Roboto" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Disabled" CaretBrush="#FFE0E0E0" Foreground="White" MouseEnter="Login_MouseEnter" MouseLeave="Login_MouseLeave"/>
-        <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Margin="44,165,0,0" VerticalAlignment="Top" Width="212" Height="35" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FFE0E0E0" Password="123456" FontSize="17" FontFamily="Roboto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE0E0E0" MouseEnter="Pass_MouseEnter" MouseLeave="Pass_MouseLeave" CaretBrush="#FFE0E0E0" BorderThickness="0" SelectionOpacity="0.5"/>
+    <Image x:Name="image" Height="300" VerticalAlignment="Top" Source="Images\Background.png" RenderTransformOrigin="0.5,0.5"/>
 
+        <Image x:Name="closeenter" Source="Images\closeenter.png" Margin="270,-3,-7,276" />
+        <Image x:Name="closeclick" Source="Images\closeclick.png" Margin="273,-6,-5,273" RenderTransformOrigin="0.5,0.5" />
+        <Image x:Name="close" Source="Images\close.png" Margin="275,-5,-2,273" MouseLeftButtonDown="close_MouseLeftButtonDown" MouseLeftButtonUp="close_MouseLeftButtonUp" RenderTransformOrigin="0.55,0.5" MouseEnter="close_MouseEnter" MouseLeave="close_MouseLeave"/>
+          
+    <Image x:Name="ButtonDown" Source= "Images\SignInButtonDown.png" Margin="108,210,107,52" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.056" />
+     
+    <Image x:Name="Button_click" Source="Images\SignInButtonClick.png" Margin="108,186,107,29" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0" RenderTransformOrigin="0.5,0.5" />
+
+    <Image x:Name="Button" Source="Images\SignInButton.png" Margin="108,210,107,52" HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="Button_MouseLeftButtonDown" MouseLeftButtonUp="Button_MouseLeftButtonUp" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" RenderTransformOrigin="0.5,0.5" />
+
+    <TextBox x:Name="Login" HorizontalAlignment="Left" Height="37" Margin="44,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="212" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="White" BorderThickness="0" SelectionOpacity="0.5" Text="Логин" FontFamily="Roboto" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextDecorations="{x:Null}" VerticalScrollBarVisibility="Disabled" CaretBrush="#FFE0E0E0" Foreground="White" MouseEnter="Login_MouseEnter" MouseLeave="Login_MouseLeave" RenderTransformOrigin="0.5,0.5"/>
+
+    <PasswordBox x:Name="Pass" HorizontalAlignment="Left" Margin="44,165,0,0" VerticalAlignment="Top" Width="212" Height="35" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="#FFE0E0E0" Password="123456" FontSize="17" FontFamily="Roboto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE0E0E0" MouseEnter="Pass_MouseEnter" MouseLeave="Pass_MouseLeave" CaretBrush="#FFE0E0E0" BorderThickness="0" SelectionOpacity="0.5" RenderTransformOrigin="0.5,0.5" />
+
+    <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="21" Stroke="Black" VerticalAlignment="Top" Width="279" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Opacity="0" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </Window>
 
